@@ -54,6 +54,7 @@ int main(int argc, char * argv[]) {
       std::cout << "Insert the input filename: ";
       std::cin >> inputFile;
       automata->loadInput(inputFile);
+      executeAutomata(automata);
       break;
     case 2:
       automata->loadInputByKeyboard();
