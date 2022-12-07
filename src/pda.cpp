@@ -19,6 +19,9 @@ void Pda::loadAutomata(std::string automataFile){
   if (file.is_open()) {
       std::string temp;
       getline(file, temp);
+      while(temp.find("#") == 0) {
+        getline(file, temp);
+      }
       readStates(temp);
       getline(file, temp);
       readInputSymbols(temp);
@@ -57,7 +60,7 @@ void Pda::nextStep(std::string actualState, In_tape input, Pda_stack stack, int 
 
     std::vector<transition_t> allowedTransitions = getTransitionsForState(actualState, input, stack);
 
-    for(long unsigned int i = 0; i < allowedTransitions.size(); i++) {
+    for(int i = 0; i < (int)allowedTransitions.size(); i++) {
       Pda_stack tempStack = stack;
       In_tape tempInput = input;
       std::string actual = allowedTransitions[i].first;
@@ -83,8 +86,8 @@ void Pda::nextStep(std::string actualState, In_tape input, Pda_stack stack, int 
       iss2 >> symbols;
 
       tempStack.pop();
-      for(long unsigned int i = symbols.size() - 1; i >= 0; i--) {
-        std::string symbol = helpers::charToString(symbols[i]);
+      for(int j = (int)symbols.size() - 1; j >= 0; j--) {
+        std::string symbol = helpers::charToString(symbols[j]);
         if(symbol != ".") tempStack.push(symbol);
       }
 
@@ -98,7 +101,7 @@ std::vector<transition_t> Pda::getTransitionsForState(std::string actualState, I
   std::string actualEmpty = actualState + " . " + stack.getTop(); // This transition is used to check e-transitions
 
   std::vector<transition_t> allowed;
-  for (long unsigned int i = 0;i < transitions_.size(); i++) {
+  for (int i = 0; i < (int)transitions_.size(); i++) {
     if (transitions_[i].first == actual || transitions_[i].first == actualEmpty) {
       allowed.push_back(transitions_[i]);
     }
@@ -119,7 +122,7 @@ void Pda::readInputSymbols(std::string symbols){
 }
 
 void Pda::readStackSymbols(std::string symbols){
-  stack_ = new Pda_stack (helpers::lineToStrings(symbols, " "));
+  stack_ = new Pda_stack(helpers::lineToStrings(symbols, " "));
 }
 
 void Pda::readInitialState(std::string state){
@@ -145,7 +148,7 @@ void Pda::saveTransition(std::string transition){
 
   std::string temp;
   iss >> temp;  // Actual state
-  if (temp.size() > 1) {
+  if (temp.size() > 0) {
     actual += temp;
     actual += " ";
     iss >> temp;  // actual input character

@@ -3,7 +3,7 @@
 #include <iostream>
 
 int main(int argc, char * argv[]) {
-  std::string automataFile = "palin.automata";
+  std::string automataFile = "APf-3.txt";
   std::string inputFile = "palin.input";
   if (argc == 3) {
     automataFile = argv[1];
@@ -12,9 +12,9 @@ int main(int argc, char * argv[]) {
   Pda pda(automataFile, inputFile);
 
   if (pda.checkInput())
-		std::cout << "\nInput is accepted\n\nn";
+		std::cout << "\nInput is accepted\n\n";
 	else
-		std::cout << "\nInput is NOT accepted\n\nn";
+		std::cout << "\nInput is NOT accepted\n\n";
 
   return 0;
 }
