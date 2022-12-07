@@ -27,6 +27,16 @@ void In_tape::loadFromFile(std::string fileName){
   std::cerr << "El fichero no exite\n";
 }
 
+void In_tape::loadFromKeyboard() {
+  characters_.clear();
+  index_ = 0;
+  std::string input;
+  std::cout << "Put string as input(without spaces between symbols): ";
+  std::cin >> input;
+  // Divide the whole string into substrings of size 1 and put them into the input tape.
+  for_each(input.begin(), input.end(), [&](char c){characters_.push_back(helpers::charToString(c)); });
+}
+
 std::string In_tape::read(){
   if(index_ < (int) characters_.size()) {
     return characters_[index_++];

@@ -7,6 +7,7 @@
 #include <vector>
 #include <algorithm>
 #include <fstream>
+#include "helpers.hpp"
 
 class In_tape {
  public:
@@ -15,6 +16,7 @@ class In_tape {
   ~In_tape();
 
   void loadFromFile(std::string fileName);
+  void loadFromKeyboard();
   std::string read();
   std::string getActualChar();
   bool hasNext();

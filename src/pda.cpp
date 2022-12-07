@@ -5,12 +5,21 @@ Pda::Pda(std::string automataFile, std::string inputFile){
   loadAutomata(automataFile);
 }
 
+Pda::Pda(std::string automataFile){
+  inputTape_ = new In_tape();
+  loadAutomata(automataFile);
+}
+
 Pda::~Pda(){
   
 }
 
 void Pda::loadInput(std::string inputFile){
   inputTape_->loadFromFile(inputFile);
+}
+
+void Pda::loadInputByKeyboard() {
+  inputTape_->loadFromKeyboard();
 }
 
 void Pda::loadAutomata(std::string automataFile){

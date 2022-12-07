@@ -15,9 +15,11 @@ typedef std::pair<std::string, std::string> transition_t;
 class Pda {
  public:
   Pda(std::string automataFile, std::string inputFile);
+	Pda(std::string automataFile);
   ~Pda();
 
   void loadInput(std::string inputFile);
+	void loadInputByKeyboard();
   void loadAutomata(std::string automataFile);
 
   bool checkInput();
